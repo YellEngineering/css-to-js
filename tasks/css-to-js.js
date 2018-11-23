@@ -31,7 +31,9 @@ module.exports = function(grunt) {
 			f.src.forEach(function (filepath, index) {
 				let path = filepath.replace(new RegExp(options.excludePathRegex), '');
 
-				if ( options.excludeFiles.indexOf(path) > -1 ) {
+				let shouldExclude = options.excludeFiles.some(subPathToExclude => path.includes(subPathToExclude));
+
+				if ( shouldExclude ) {
 					return false;
 				}
 
